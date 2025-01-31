@@ -6,7 +6,7 @@
     <title>Login Page</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: Arial, sans-serif;
             background-color: #3498db;
             display: flex;
             align-items: center;
@@ -20,9 +20,11 @@
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             text-align: center;
+            width: 300px;
         }
         .input-group {
-            margin-bottom: 20px;
+            margin-bottom: 15px;
+            text-align: left;
         }
         input {
             width: 100%;
@@ -37,12 +39,11 @@
             display: flex;
             flex-direction: column;
             align-items: flex-start;
-            margin-top: 10px;
+            margin-bottom: 15px;
         }
-        .show-password,
-        .consent-checkbox {
-            margin-top: 10px;
-            text-align: left;
+        label {
+            font-size: 14px;
+            cursor: pointer;
         }
         button {
             background-color: #3498db;
@@ -52,6 +53,10 @@
             border-radius: 4px;
             cursor: pointer;
             font-size: 16px;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #2980b9;
         }
     </style>
 </head>
@@ -60,36 +65,27 @@
 <div class="login-container">
     <h2>Login</h2>
     <div class="input-group">
-        <input type="text" placeholder="Enter username" id="username" required>
+        <label for="username">Username</label>
+        <input type="text" id="username" placeholder="Enter username" required>
     </div>
     <div class="input-group">
-        <input type="password" placeholder="Enter password" id="password" required>
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Enter password" required>
     </div>
     <div class="checkbox-group">
-        <div class="show-password">
-            <input type="checkbox" id="showPassword"> Show Password
-        </div>
-        <div class="consent-checkbox">
-            <label>
-                <input type="checkbox" id="consentCheckbox"> I am willingly logging in
-            </label>
-        </div>
+        <label><input type="checkbox" id="showPassword"> Show Password</label>
+        <label><input type="checkbox" id="consentCheckbox"> I am willingly logging in</label>
     </div>
     <button onclick="login()">Login</button>
 </div>
 
 <script>
-    const passwordInput = document.getElementById('password');
-    const showPasswordCheckbox = document.getElementById('showPassword');
-
-    showPasswordCheckbox.addEventListener('change', function () {
-        const type = showPasswordCheckbox.checked ? 'text' : 'password';
-        passwordInput.type = type;
+    document.getElementById('showPassword').addEventListener('change', function () {
+        document.getElementById('password').type = this.checked ? 'text' : 'password';
     });
 
     function login() {
-        const consentCheckbox = document.getElementById('consentCheckbox');
-        if (consentCheckbox.checked) {            
+        if (document.getElementById('consentCheckbox').checked) {
             window.location.href = 'leo.html';
         } else {
             alert("Please check the consent checkbox before logging in.");
